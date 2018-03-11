@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="prism.css" rel="stylesheet" />
+    <style>
+        .container {
+            margin: 0 auto;
+            max-width: 700px;
+        }
+        #output {
+            border: 1px solid #ddd;
+            padding-left: 10px;
+            padding-right: 10px;
+            background-color: #f4f4f4;
+        }
+        pre {
+            margin-top: 10px;
+        }
+    </style>
+    <script src="prism.js" data-manual></script>
+</head>
+<body>
+    <div class="container">
+
+        <div><h3>Plain Coloured Code: </h3></div>
+        <div>
+            <form name="codeForm">
+                <textarea name="inputTxt" rows="30" cols="85"></textarea>
+                <br><br>
+                <input type="button" value="Highlight"
+                onclick="convert(document.codeForm.inputTxt.value, 'html')">
+            </form>
+        </div>
+        <br>
+        <div><h3>Highlighted Code: </h3></div>
+        <div id="output"></div>
+    </div>
+    <script>
+        function convert(txt, type) {  
+            // Returns a highlighted HTML string 
+            var html;    
+            switch(type){
+                case 'html':
+                    html = Prism.highlight(txt, Prism.languages.html);
+                    break;
+                case 'js':
+                    html = Prism.highlight(txt, Prism.languages.javascript);
+                    break;
+                default:
+                    html = Prism.highlight(txt, Prism.languages.html);
+            }    
+            html = '<pre>' + html + '</pre>'
+            document.getElementById('output').innerHTML = html;
+        }
+    </script>
+</body>
+</html> 
